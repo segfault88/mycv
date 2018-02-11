@@ -26,18 +26,26 @@ func lorem() string {
 
 func main() {
 	pdf := gofpdf.New("P", "mm", "A4", "")
+
+	pdf.SetFontLocation("fonts/")
+	pdf.AddFont("OpenSans-Bold", "", "OpenSans-Bold.json")
+	pdf.AddFont("Roboto-Regular", "", "Roboto-Regular.json")
+
+	pdf.SetFont("OpenSans-Bold", "", 16)
+	pdf.SetTextColor(25, 25, 25)
+
 	pdf.AddPage()
-	pdf.SetFont("Helvetica", "B", 16)
+	// pdf.SetFont("Helvetica", "B", 16)
 	pdf.Cell(40, 10, "Malcolm Lockyer")
 	pdf.Ln(-1)
 
-	pdf.SetFont("Helvetica", "", 14)
+	pdf.SetFont("Roboto-Regular", "", 14)
 	pdf.Cell(40, 10, "Stuff")
 
 	pdf.Ln(-1)
 	pdf.MultiCell(0, 5, lorem(), "", "", false)
 	pdf.Ln(-1)
-	pdf.SetFont("", "I", 0)
+	// pdf.SetFont("", "I", 0)
 	pdf.Cell(0, 5, "(end of excerpt)")
 
 	err := pdf.OutputFileAndClose("MalcolmLockyer.pdf")
